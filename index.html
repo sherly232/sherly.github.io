@@ -4,25 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的个人主页</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 引入 Tailwind CSS（优化 CDN 地址，确保稳定性） -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  
+  <!-- 引入 Font Awesome（更换为更稳定的 CDN） -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#f8bbd0', // 浅粉色作为主色调
-            secondary: '#a5d6a7', // 浅绿色作为辅助色
-            accent: '#ffccbc', // 淡橙色作为强调色
-            dark: '#424242', // 深灰色用于文本
+            primary: '#f8bbd0',
+            secondary: '#a5d6a7',
+            accent: '#ffccbc',
+            dark: '#424242',
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
           },
         },
       }
-    }
+    };
   </script>
+
+  <!-- 自定义 Tailwind 样式 -->
   <style type="text/tailwindcss">
     @layer utilities {
       .content-auto {
