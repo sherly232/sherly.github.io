@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学业成长 | 我的个人主页</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#f8bbd0', // 浅粉色作为主色调
+            secondary: '#a5d6a7', // 浅绿色作为辅助色
+            accent: '#ffccbc', // 淡橙色作为强调色
+            dark: '#424242', // 深灰色用于文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="index.html" class="text-2xl font-bold text-primary">
+            <i class="fa fa-heart-o mr-2"></i>我的小世界
+          </a>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
+          <a href="books.html" class="text-dark hover:text-primary transition-colors font-medium">读书时光</a>
+          <a href="travel.html" class="text-dark hover:text-primary transition-colors font-medium">旅行足迹</a>
+          <a href="study.html" class="text-primary font-medium">学业成长</a>
+        </nav>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-dark hover:text-primary">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <div class="container mx-auto px-4 py-3 space-y-2">
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">首页</a>
+        <a href="books.html" class="block py-2 text-dark hover:text-primary">读书时光</a>
+        <a href="travel.html" class="block py-2 text-dark hover:text-primary">旅行足迹</a>
+        <a href="study.html" class="block py-2 text-primary font-medium">学业成长</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-accent/20 to-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark leading-tight mb-4">
+          学业<span class="text-accent">成长</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          记录我的学习历程、参与的活动和取得的点滴进步。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#" class="px-4 py-2 bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors">
+            学术活动
+          </a>
+          <a href="#" class="px-4 py-2 bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors">
+            竞赛经历
+          </a>
+          <a href="#" class="px-4 py-2 bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors">
+            志愿者服务
+          </a>
+          <a href="#" class="px-4 py-2 bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors">
+            技能证书
+          </a>
+          <a href="#" class="px-4 py-2 bg-accent/20 text-accent rounded-full hover:bg-accent/30 transition-colors">
+            学习资源
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育背景 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">教育背景</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          我的学习历程和学术成就
+        </p>
+        <div class="w-20 h-1 bg-accent mx-auto mt-4"></div>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl p-8 shadow-md max-w-4xl mx-auto">
+        <div class="space-y-8">
+          <div>
+            <div class="text-sm font-medium text-accent mb-1">2023年9月 - 至今</div>
+            <h3 class="text-xl font-bold text-dark mb-1">中南财经政法大学</h3>
+            <p class="text-gray-600 mb-2">信息与安全专业 | 本科</p>
+            <p class="text-gray-600">
+              主修课程：数据结构、算法分析、计算机组成原理、操作系统、编程语言（Python、Java、C++）、数据库系统等。
+              目前GPA：3.7/4.0，排名前20%。
+            </p>
+          </div>
+          
+          <div>
+            <div class="text-sm font-medium text-accent mb-1">2020年9月 - 2023年6月</div>
+            <h3 class="text-xl font-bold text-dark mb-1">七中实验高中</h3>
+            <p class="text-gray-600 mb-2">理科 | 高中毕业</p>
+            <p class="text-gray-600">
+              主要课程：数学、物理、化学、生物、英语等。
+              曾担任班级学习委员，多次获得校级优秀学生称号。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学术活动 -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">学术活动</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          参与的学术讲座、研讨会和项目
+        </p>
+        <div class="w-20 h-1 bg-accent mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 活动1 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <img src="images/study1.jpg" alt="人工智能讲座" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <span class="text-xs font-medium bg-accent/20 text-accent px-2 py-1 rounded">学术讲座</span>
+              <span class="text-sm text-gray-500 ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2025-05</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">人工智能前沿技术讲座</h3>
+            <p class="text-gray-600 mb-4">
+              参加了由学校主办的人工智能前沿技术讲座，听取了来自顶尖科技公司的专家分享最新的AI研究成果和应用案例，拓宽了我的技术视野。
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <div class="flex items-center mr-4">
+                <i class="fa fa-user-o mr-1"></i>
+                <span>主讲人：张教授</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-map-marker mr-1"></i>
+                <span>中南财经政法大学学术报告厅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 活动2 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <img src="images/study2.jpg" alt="编程竞赛" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <span class="text-xs font-medium bg-accent/20 text-accent px-2 py-1 rounded">编程竞赛</span>
+              <span class="text-sm text-gray-500 ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2025-03</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">湖北大学生程序设计竞赛</h3>
+            <p class="text-gray-600 mb-4">
+              作为团队成员参加了全国大学生程序设计竞赛，与队友合作解决了多个算法难题，最终获得了省级二等奖。这次竞赛提高了我的编程能力和团队协作能力。
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <div class="flex items-center mr-4">
+                <i class="fa fa-users mr-1"></i>
+                <span>团队成员：5人</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-trophy text-yellow-500 mr-1"></i>
+                <span>省级二等奖</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 活动3 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <img src="images/study3.jpg" alt="项目实践" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <span class="text-xs font-medium bg-accent/20 text-accent px-2 py-1 rounded">项目实践</span>
+              <span class="text-sm text-gray-500 ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2025-01</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">校园智能导航系统开发</h3>
+            <p class="text-gray-600 mb-4">
+              参与开发了校园智能导航系统，负责前端页面设计和部分后端逻辑实现。该系统帮助新生快速熟悉校园环境，提高了校园生活的便利性。
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <div class="flex items-center mr-4">
+                <i class="fa fa-code mr-1"></i>
+                <span>技术栈：Python, Django, HTML, CSS, JavaScript</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-users mr-1"></i>
+                <span>团队规模：5人</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 活动4 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <img src="images/study4.jpg" alt="志愿者服务" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <span class="text-xs font-medium bg-accent/20 text-accent px-2 py-1 rounded">志愿者服务</span>
+              <span class="text-sm text-gray-500 ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2024-11</span>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">社区编程启蒙活动</h3>
+            <p class="text-gray-600 mb-4">
+              作为志愿者参与了社区组织的编程启蒙活动，向小学生教授基础的编程概念和Scratch编程。通过这次活动，我不仅帮助了他人，也提升了自己的教学能力。
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <div class="flex items-center mr-4">
+                <i class="fa fa-clock-o mr-1"></i>
+                <span>服务时长：12小时</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-users mr-1"></i>
+                <span>参与学生：20人</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能证书 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">技能证书</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          我的专业技能和获得的证书
+        </p>
+        <div class="w-20 h-1 bg-accent mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 技能卡片1 -->
+        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-code text-2xl text-accent"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-2">Python</h3>
+          <div class="flex justify-center">
+            <div class="flex">
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star-half-o text-accent"></i>
+            </div>
+          </div>
+          <p class="mt-3 text-gray-600">
+            熟练使用Python进行数据分析、Web开发和自动化脚本编写，熟悉NumPy、Pandas、Django等库和框架。
+          </p>
+        </div>
+        
+        <!-- 技能卡片2 -->
+        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-code-fork text-2xl text-accent"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-2">Java</h3>
+          <div class="flex justify-center">
+            <div class="flex">
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+            </div>
+          </div>
+          <p class="mt-3 text-gray-600">
+            掌握Java核心编程、面向对象设计和常用类库，有使用Spring和Spring Boot开发企业级应用的经验。
+          </p>
+        </div>
+        
+        <!-- 技能卡片3 -->
+        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-cogs text-2xl text-accent"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-2">C++</h3>
+          <div class="flex justify-center">
+            <div class="flex">
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star text-accent"></i>
+              <i class="fa fa-star-half-o text-accent"></i>
+            </div>
+          </div>
+          <p class="mt-3 text-gray-600">
+            熟悉C++基础语法、数据结构和算法，能够进行系统编程和性能优化，了解STL和多线程编程。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">关于我</h3>
+          <p class="text-gray-300">
+            我是一名信息与安全专业的学生，热爱编程和探索新技术，希望通过这个网站记录我的学习和成长历程。
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">联系方式</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="fa fa-envelope-o mr-2"></i>
+              <a href="mailto:example@mail.com" class="text-gray-300 hover:text-white">sherlymes@foxmail.com</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-phone mr-2"></i>
+              <span class="text-gray-300">180-1064-2320</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-map-marker mr-2"></i>
+              <span class="text-gray-300">湖北省武汉市</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">关注我</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-github"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 我的小世界 | 版权所有</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 100) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-white/90');
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-white/90');
+      }
+    });
+    
+    // 移动端菜单切换
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

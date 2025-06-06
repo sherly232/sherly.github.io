@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>书香漫卷 | 我的阅读世界</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#f8bbd0', // 浅粉色作为主色调
+            secondary: '#a5d6a7', // 浅绿色作为辅助色
+            accent: '#ffccbc', // 淡橙色作为强调色
+            dark: '#424242', // 深灰色用于文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.03);
+      }
+      .book-card {
+        transition: all 0.3s ease;
+      }
+      .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+      }
+      .rating-star {
+        color: #FFD700;
+        transition: transform 0.2s ease;
+      }
+      .book-card:hover .rating-star {
+        transform: scale(1.1);
+      }
+      .reading-note {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+      .reading-note.expanded {
+        max-height: 1000px;
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: theme('colors.primary');
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .book-gradient {
+        background: linear-gradient(135deg, theme('colors.primary/10') 0%, theme('colors.secondary/10') 100%);
+      }
+      .carousel-container {
+        position: relative;
+        overflow: hidden;
+      }
+      .carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .carousel-slide {
+        min-width: 100%;
+      }
+      .carousel-control {
+        cursor: pointer;
+        z-index: 10;
+      }
+      .carousel-indicator {
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .carousel-indicator.active {
+        background-color: white;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="index.html" class="text-2xl font-bold text-primary">
+            <i class="fa fa-book mr-2"></i>书香漫卷
+          </a>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-dark hover:text-primary transition-colors font-medium">首页</a>
+          <a href="books.html" class="nav-link text-primary font-medium">读书时光</a>
+          <a href="travel.html" class="nav-link text-dark hover:text-primary transition-colors font-medium">旅行足迹</a>
+          <a href="study.html" class="nav-link text-dark hover:text-primary transition-colors font-medium">学业成长</a>
+        </nav>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-dark hover:text-primary">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <div class="container mx-auto px-4 py-3 space-y-2">
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">首页</a>
+        <a href="books.html" class="block py-2 text-primary font-medium">读书时光</a>
+        <a href="travel.html" class="block py-2 text-dark hover:text-primary">旅行足迹</a>
+        <a href="study.html" class="block py-2 text-dark hover:text-primary">学业成长</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24 book-gradient">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-dark leading-tight mb-4">
+          阅读的<span class="text-primary">奇妙旅程</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          每一本书都是一个世界，每一次阅读都是一次心灵的旅行。在这里，我分享我的阅读感悟和收获。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+          <a href="#" class="px-6 py-3 bg-primary text-white rounded-full hover:bg-primary/90 transition-all hover-scale shadow-md">
+            <i class="fa fa-book mr-2"></i>本月精选
+          </a>
+          <a href="#" class="px-6 py-3 bg-white text-dark rounded-full hover:bg-gray-100 transition-all hover-scale shadow-md">
+            <i class="fa fa-list mr-2"></i>阅读书单
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 本月阅读主题 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
+          <span class="relative inline-block">
+            五月阅读精选
+            <div class="absolute -bottom-2 left-0 w-full h-2 bg-accent/30 rounded"></div>
+          </span>
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mt-4">
+          五月是充满变化的一个月，阅读也变得更加多元化。这个月我读完了3本书，包括一本心理学著作、两本文学小说。
+        </p>
+      </div>
+      
+     <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg max-w-6xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2">
+    <!-- 轮播图片区域 -->
+    <div class="relative h-64 md:h-auto">
+      <div class="carousel-container relative w-full h-full">
+        <!-- 轮播图片 -->
+        <div class="carousel-slides flex transition-transform duration-500 ease-in-out" id="carousel">
+          <div class="carousel-slide min-w-full">
+            <img src="images/monthly-review1.jpg" alt="五月阅读回顾" class="w-full h-full object-cover">
+          </div>
+          <div class="carousel-slide min-w-full">
+            <img src="images/monthly-review2.jpg" alt="阅读书单" class="w-full h-full object-cover">
+          </div>
+          <div class="carousel-slide min-w-full">
+            <img src="images/monthly-review3.jpg" alt="阅读统计" class="w-full h-full object-cover">
+          </div>
+        </div>
+        
+        <!-- 轮播控制按钮 -->
+        <button class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/50 transition-colors carousel-control prev" id="prevBtn">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/50 transition-colors carousel-control next" id="nextBtn">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        
+        <!-- 轮播指示器 -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+          <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors carousel-indicator active" data-index="0"></button>
+          <button class="w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-colors carousel-indicator" data-index="1"></button>
+          <button class="w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-colors carousel-indicator" data-index="2"></button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右侧内容 -->
+    <div class="p-6 md:p-8">
+      <div class="mb-6 flex items-center">
+        <div class="flex -space-x-2">
+          <img src="images/book1.jpg" alt="山茶文具店" class="w-14 h-14 rounded-full border-2 border-white hover-scale">
+          <img src="images/book2.jpg" alt="被讨厌的勇气" class="w-14 h-14 rounded-full border-2 border-white hover-scale">
+          <img src="images/book3.jpg" alt="人类简史" class="w-14 h-14 rounded-full border-2 border-white hover-scale">
+        </div>
+        <div class="ml-4">
+          <div class="text-sm font-medium text-gray-500">本月阅读量</div>
+          <div class="text-2xl font-bold text-primary">3 本</div>
+        </div>
+      </div>
+      
+      <div class="space-y-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+            <i class="fa fa-quote-left"></i>
+          </div>
+          <p class="ml-4 text-gray-600 italic">
+            "阅读是一座随身携带的避难所，让我们在任何时候都能逃离现实的喧嚣，进入一个全新的世界。"
+          </p>
+        </div>
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+            <i class="fa fa-lightbulb-o"></i>
+          </div>
+          <p class="ml-4 text-gray-600">
+            本月主题：自我探索与成长
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+           </section>   
+            
+          
+
+  <!-- 书籍详情 -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 书籍1 -->
+        <div class="book-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative">
+            <img src="images/book1.jpg" alt="山茶文具店" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+              文学小说
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-2">山茶文具店</h3>
+            <div class="flex mb-3">
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star-half-o rating-star"></i>
+              <span class="ml-2 text-sm text-gray-500">4.5/5</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">小川糸 (作者)</p>
+            <p class="text-gray-600 mb-4">
+              在镰仓，有一家帮人代笔的文具店，每一封信都由店主雨宫鸠子用心打造。这本书通过一封封书信，讲述了普通人的生活故事，温暖而治愈。
+            </p>
+            <button class="book-expand-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+              展开阅读笔记
+            </button>
+            <div class="reading-note mt-4">
+              <h4 class="font-semibold text-lg mb-2">阅读笔记</h4>
+              <p class="text-gray-600 mb-3">
+                《山茶文具店》是一本非常治愈的小说，通过文具店主人代笔的故事，展现了书信的温度和人与人之间细腻的情感连接。书中的每个人物都有自己的故事和烦恼，而鸠子通过一封封书信，帮助他们传递难以言表的情感。
+              </p>
+              <p class="text-gray-600 mb-3">
+                给我印象最深的是为一位客户写分手信的情节。鸠子并没有简单地按照客户的要求写一封决绝的信，而是深入了解他们的关系，用温暖而坚定的语言，既表达了结束的决心，又保留了对过去的尊重和感激。这让我意识到，文字不仅是信息的载体，更是情感的艺术。
+              </p>
+              <p class="text-gray-600 mb-3">
+                书中对日本传统文化和文具的描写也非常细腻，让我对和纸、钢笔、墨水等文具有了更深的认识。作者通过鸠子的视角，展现了一种慢生活的态度，在这个快节奏的时代，这种对细节的关注和对情感的珍视尤为珍贵。
+              </p>
+              <p class="text-gray-600">
+                读完这本书，我开始重新审视书信的价值。在电子邮件和即时通讯工具盛行的今天，手写书信变得越来越珍贵。它不仅是一种沟通方式，更是一种表达诚意和用心的方式。我决定以后重要的事情，都尝试用书信来表达。
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 书籍2 -->
+        <div class="book-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative">
+            <img src="images/book2.jpg" alt="被讨厌的勇气" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium">
+              心理学
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-2">被讨厌的勇气</h3>
+            <div class="flex mb-3">
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star-o rating-star"></i>
+              <span class="ml-2 text-sm text-gray-500">4.0/5</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">岸见一郎, 古贺史健 (作者)</p>
+            <p class="text-gray-600 mb-4">
+              这本书以阿德勒心理学为基础，通过青年与哲人的对话，探讨了如何摆脱自卑情结，获得自由和幸福。它让我重新审视自己的生活方式和人际关系。
+            </p>
+            <button class="book-expand-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+              展开阅读笔记
+            </button>
+            <div class="reading-note mt-4">
+              <h4 class="font-semibold text-lg mb-2">阅读笔记</h4>
+              <p class="text-gray-600 mb-3">
+                《被讨厌的勇气》是一本关于自我成长和人际关系的心理学著作，它以对话的形式，深入浅出地介绍了阿德勒心理学的核心思想。书中最让我震撼的观点是"课题分离"和"目的论"。
+              </p>
+              <p class="text-gray-600 mb-3">
+                "课题分离"的概念让我意识到，我们常常把别人的课题和自己的课题混为一谈，从而给自己带来不必要的压力和烦恼。例如，父母总是试图控制孩子的选择，认为这是自己的责任，但实际上，孩子的人生是他们自己的课题，我们应该尊重他们的选择，只做好自己能做的事情。
+              </p>
+              <p class="text-gray-600 mb-3">
+                "目的论"则颠覆了我对因果关系的传统理解。阿德勒认为，我们的行为不是由过去的经历决定的，而是由我们现在的目的决定的。例如，一个人之所以害怕社交，不是因为他过去有过不好的经历，而是因为他现在有"不想与人交往"的目的，从而找出各种理由来逃避社交。这种观点让我意识到，我们有能力改变自己，只要我们愿意。
+              </p>
+              <p class="text-gray-600 mb-3">
+                书中还探讨了如何建立健康的人际关系。阿德勒认为，人际关系的起点是"课题分离"，终点是"共同体感觉"。我们应该把他人看作是与自己平等的伙伴，而不是竞争对手或敌人。只有这样，我们才能在人际关系中获得真正的自由和幸福。
+              </p>
+              <p class="text-gray-600">
+                读完这本书，我开始尝试用阿德勒心理学的观点来审视自己的生活。虽然实践起来并不容易，但我相信，只要坚持下去，我一定能够摆脱过去的束缚，获得真正的自由和幸福。这本书值得每个人反复阅读，每次都会有新的收获。
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 书籍3 -->
+        <div class="book-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative">
+            <img src="images/book3.jpg" alt="人类简史" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
+              历史文化
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-2">人类简史</h3>
+            <div class="flex mb-3">
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <i class="fa fa-star rating-star"></i>
+              <span class="ml-2 text-sm text-gray-500">5.0/5</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">尤瓦尔·赫拉利 (作者)</p>
+            <p class="text-gray-600 mb-4">
+              从认知革命、农业革命到科学革命，这本书以宏大的视角讲述了人类如何从一个普通的非洲灵长类动物，发展成为地球的主宰。读完后对人类的过去和未来有了全新的认识。
+            </p>
+            <button class="book-expand-btn w-full py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+              展开阅读笔记
+            </button>
+            <div class="reading-note mt-4">
+              <h4 class="font-semibold text-lg mb-2">阅读笔记</h4>
+              <p class="text-gray-600 mb-3">
+                《人类简史》是一本极具震撼力的历史著作，作者尤瓦尔·赫拉利以从全新的视角讲述了人类的进化史。这本书让我对人类这个物种有了更深刻的认识，也让我对未来充满了思考。
+              </p>
+              <p class="text-gray-600 mb-3">
+                书中最让我印象深刻的是"认知革命"、"农业革命"和"科学革命"这三大章节。作者认为，认知革命让人类拥有了虚构故事的能力，从而形成了文化和宗教；农业革命让人类从狩猎采集社会转向农业社会，但也带来了更多的劳动和不平等；科学革命则让人类拥有了改变自然和创造未来的能力。
+              </p>
+              <p class="text-gray-600 mb-3">
+                在讲述每个革命的过程中，作者不仅关注技术和经济的变化，还深入探讨了人类的心理、社会和文化的变化。例如，在农业革命章节中，作者指出，虽然农业生产让人类获得了更多的食物，但也让人类从自由的狩猎采集者变成了土地的奴隶，生活变得更加辛苦和单调。这种观点颠覆了我对农业革命的传统看法。
+              </p>
+              <p class="text-gray-600 mb-3">
+                书中对未来的展望也非常引人深思。作者认为，随着生物技术和人工智能的发展，人类可能会迎来"智神"时代，人类将不再是进化的终点，而是会被自己创造的超人类所取代。这种观点让我对未来既充满了期待，又感到一丝恐惧。
+              </p>
+              <p class="text-gray-600">
+                读完这本书，我意识到人类的历史是一部不断创造和改变的历史。我们从一个普通的非洲灵长类动物，发展成为地球的主宰，这是一个奇迹。但同时，我们也面临着许多挑战，如环境破坏、资源短缺、社会不平等等等。希望我们能够从历史中吸取教训，创造一个更加美好的未来。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 阅读统计 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">我的阅读统计</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          记录阅读历程，见证成长轨迹
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-gray-50 rounded-xl p-6 text-center hover-scale">
+          <div class="text-4xl font-bold text-primary mb-2">56</div>
+          <div class="text-gray-600">累计阅读书籍</div>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 text-center hover-scale">
+          <div class="text-4xl font-bold text-primary mb-2">2,480</div>
+          <div class="text-gray-600">累计阅读时长(小时)</div>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 text-center hover-scale">
+          <div class="text-4xl font-bold text-primary mb-2">12</div>
+          <div class="text-gray-600">今年已读</div>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 text-center hover-scale">
+          <div class="text-4xl font-bold text-primary mb-2">3</div>
+          <div class="text-gray-600">本月目标</div>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-gray-50 rounded-xl p-6">
+        <h3 class="text-xl font-bold text-dark mb-6">阅读类别分布</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <canvas id="readingChart" width="400" height="300"></canvas>
+          </div>
+          <div>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="font-medium">文学小说</span>
+                  <span>42%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-primary h-2.5 rounded-full" style="width: 42%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="font-medium">心理学</span>
+                  <span>23%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-secondary h-2.5 rounded-full" style="width: 23%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="font-medium">历史文化</span>
+                  <span>18%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-accent h-2.5 rounded-full" style="width: 18%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="font-medium">科技科普</span>
+                  <span>12%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-dark h-2.5 rounded-full" style="width: 12%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="font-medium">其他</span>
+                  <span>5%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-gray-400 h-2.5 rounded-full" style="width: 5%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">书香漫卷</h3>
+          <p class="text-gray-400 mb-4">
+            记录阅读的美好时光，分享知识的力量。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-github"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="books.html" class="text-gray-400 hover:text-white transition-colors">读书时光</a></li>
+            <li><a href="travel.html" class="text-gray-400 hover:text-white transition-colors">旅行足迹</a></li>
+            <li><a href="study.html" class="text-gray-400 hover:text-white transition-colors">学业成长</a></li>
+            <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">联系我</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">读书分类</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">文学小说</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">心理学</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">历史文化</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">科技科普</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">哲学思考</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
+          <p class="text-gray-400 mb-4">
+            订阅我的博客，获取最新读书心得和推荐。
+          </p>
+          <form>
+            <div class="flex">
+              <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark">
+              <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 rounded-r-lg transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 书香漫卷. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-white/90');
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-white/90');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (mobileMenu.classList.contains('hidden')) {
+        menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+      } else {
+        menuToggle.innerHTML = '<i class="fa fa-times text-xl"></i>';
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          // 关闭移动菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+          }
+        }
+      });
+    });
+    
+    // 展开/收起阅读笔记
+    document.querySelectorAll('.book-expand-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const note = this.nextElementSibling;
+        note.classList.toggle('expanded');
+        this.textContent = note.classList.contains('expanded') ? '收起阅读笔记' : '展开阅读笔记';
+      });
+    });
+    
+    // 轮播图功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.getElementById('carousel');
+      const indicators = document.querySelectorAll('.carousel-indicator');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      if (carousel && prevBtn && nextBtn) {
+        let currentSlide = 0;
+        const slideCount = carousel.children.length;
+        let interval;
+        
+        // 初始化轮播
+        function initCarousel() {
+          startAutoSlide();
+          setupIndicators();
+          setupButtons();
+        }
+        
+        // 自动轮播
+        function startAutoSlide() {
+          interval = setInterval(() => {
+            nextSlide();
+          }, 5000);
+        }
+        
+        // 停止自动轮播
+        function stopAutoSlide() {
+          clearInterval(interval);
+        }
+        
+        // 切换到下一张
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slideCount;
+          updateSlide();
+        }
+        
+        // 切换到上一张
+        function prevSlide() {
+          currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+          updateSlide();
+        }
+        
+        // 更新轮播显示
+        function updateSlide() {
+          carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+          
+          // 更新指示器状态
+          indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+              indicator.classList.add('active');
+            } else {
+              indicator.classList.remove('active');
+            }
+          });
+        }
+        
+        // 设置指示器点击事件
+        function setupIndicators() {
+          indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+              currentSlide = index;
+              updateSlide();
+              resetAutoSlide();
+            });
+          });
+        }
+        
+        // 设置按钮点击事件
+        function setupButtons() {
+          prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            prevSlide();
+            resetAutoSlide();
+          });
+          
+          nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextSlide();
+            resetAutoSlide();
+          });
+        }
+        
+        // 重置自动轮播
+        function resetAutoSlide() {
+          stopAutoSlide();
+          startAutoSlide();
+        }
+        
+        // 初始化轮播
+        initCarousel();
+        
+        // 鼠标悬停时停止自动轮播
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+          carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+          carouselContainer.addEventListener('mouseleave', startAutoSlide);
+        }
+      }
+    });
+    
+    // 阅读类别图表
+    document.addEventListener('DOMContentLoaded', function() {
+      const ctx = document.getElementById('readingChart').getContext('2d');
+      const readingChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['文学小说', '心理学', '历史文化', '科技科普', '其他'],
+          datasets: [{
+            data: [42, 23, 18, 12, 5],
+            backgroundColor: [
+              '#f8bbd0',
+              '#a5d6a7',
+              '#ffccbc',
+              '#424242',
+              '#bdbdbd'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20,
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.label + ': ' + context.raw + '%';
+                }
+              }
+            }
+          },
+          cutout: '70%'
+        }
+      });
+    });
+  </script>
+</body>
+</html>

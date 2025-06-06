@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旅行足迹 | 我的个人主页</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#f8bbd0', // 浅粉色作为主色调
+            secondary: '#a5d6a7', // 浅绿色作为辅助色
+            accent: '#ffccbc', // 淡橙色作为强调色
+            dark: '#424242', // 深灰色用于文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+      .travel-card {
+        transition: all 0.3s ease;
+      }
+      .travel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="index.html" class="text-2xl font-bold text-primary">
+            <i class="fa fa-heart-o mr-2"></i>我的小世界
+          </a>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
+          <a href="books.html" class="text-dark hover:text-primary transition-colors font-medium">读书时光</a>
+          <a href="travel.html" class="text-primary font-medium">旅行足迹</a>
+          <a href="study.html" class="text-dark hover:text-primary transition-colors font-medium">学业成长</a>
+        </nav>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-dark hover:text-primary">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <div class="container mx-auto px-4 py-3 space-y-2">
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">首页</a>
+        <a href="books.html" class="block py-2 text-dark hover:text-primary">读书时光</a>
+        <a href="travel.html" class="block py-2 text-primary font-medium">旅行足迹</a>
+        <a href="study.html" class="block py-2 text-dark hover:text-primary">学业成长</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-secondary/20 to-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark leading-tight mb-4">
+          旅行<span class="text-secondary">足迹</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          世界是一本书，不踏上旅途的人只读了一页。这里记录了我的旅行故事和美好回忆。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#" class="px-4 py-2 bg-secondary/20 text-secondary rounded-full hover:bg-secondary/30 transition-colors">
+            亚洲
+          </a>
+          <a href="#" class="px-4 py-2 bg-secondary/20 text-secondary rounded-full hover:bg-secondary/30 transition-colors">
+            欧洲
+          </a>
+          <a href="#" class="px-4 py-2 bg-secondary/20 text-secondary rounded-full hover:bg-secondary/30 transition-colors">
+            城市探索
+          </a>
+          <a href="#" class="px-4 py-2 bg-secondary/20 text-secondary rounded-full hover:bg-secondary/30 transition-colors">
+            文化体验
+          </a>
+          <a href="#" class="px-4 py-2 bg-secondary/20 text-secondary rounded-full hover:bg-secondary/30 transition-colors">
+            美食之旅
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 旅行地图 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">旅行地图</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          我已经走过15个城市，每一段旅程都有独特的故事
+        </p>
+        <div class="w-20 h-1 bg-secondary mx-auto mt-4"></div>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl p-6 shadow-md max-w-4xl mx-auto">
+        <div class="relative h-80 md:h-96 overflow-hidden rounded-lg">
+          <!-- 这里应该是一个交互式地图，但由于限制，用图片代替 -->
+          <img src="images/travel-map.jpg" alt="旅行地图" class="w-full h-full object-cover">
+          <div class="absolute inset-0 pointer-events-none">
+            <!-- 地图标记点 -->
+            <div class="absolute top-1/4 left-1/3 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
+            <div class="absolute top-1/3 left-2/3 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
+            <div class="absolute top-2/3 left-1/2 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
+            <div class="absolute top-1/2 left-1/4 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
+            <div class="absolute top-3/4 left-3/4 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary">15+</div>
+            <div class="text-sm text-gray-600">城市</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary">8</div>
+            <div class="text-sm text-gray-600">国家</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary">3</div>
+            <div class="text-sm text-gray-600">大洲</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary">50+</div>
+            <div class="text-sm text-gray-600">景点</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary">300+</div>
+            <div class="text-sm text-gray-600">照片</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最近旅行 -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">最近旅行</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          记录我的最新旅行经历和见闻
+        </p>
+        <div class="w-20 h-1 bg-secondary mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 旅行记录1（日本东京大阪双城记） -->
+        <div class="travel-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative">
+            <img src="images/travel1.jpg" alt="日本东京大阪" class="w-full h-64 object-cover"> <!-- 建议更换为东京大阪相关图片 -->
+            <div class="absolute inset-0 gradient-overlay flex items-end">
+              <div class="p-6">
+                <div class="flex items-center mb-2">
+                  <span class="text-xs font-medium bg-white/20 text-white px-2 py-1 rounded">城市探索</span> <!-- 标签改为更贴合的分类 -->
+                  <span class="text-sm text-white ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2025-05</span> <!-- 日期调整为实际旅行时间 -->
+                </div>
+                <h3 class="text-xl font-bold text-white">日本东京大阪双城记</h3> <!-- 标题修改为东京大阪 -->
+                <p class="text-white/90">
+                  探索东京的繁华都市与大阪的市井烟火，打卡富士山、道顿堀，体验传统与现代的碰撞。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <!-- 建议更换为东京大阪相关照片 -->
+              <img src="images/travel1-1.jpg" alt="东京塔" class="w-full h-24 object-cover rounded-lg">
+              <img src="images/travel1-2.jpg" alt="大阪道顿堀" class="w-full h-24 object-cover rounded-lg">
+              <img src="images/travel1-3.jpg" alt="富士山" class="w-full h-24 object-cover rounded-lg">
+            </div>
+            <p class="text-gray-600 mb-4">
+              这次旅程深入体验了东京的科技感与大阪的美食文化。从东京塔的夜景到富士山的壮丽，从大阪城的历史到道顿堀的热闹，每一天都充满惊喜。
+            </p>
+            <a href="travel-detail1.html" class="text-secondary hover:text-secondary/80 font-medium inline-flex items-center">
+              查看详情 <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 旅行记录2（西班牙巴塞罗那艺术之旅） -->
+        <div class="travel-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative">
+            <img src="images/travel2.jpg" alt="西班牙巴塞罗那" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 gradient-overlay flex items-end">
+              <div class="p-6">
+                <div class="flex items-center mb-2">
+                  <span class="text-xs font-medium bg-white/20 text-white px-2 py-1 rounded">艺术与建筑</span>
+                  <span class="text-sm text-white ml-auto"><i class="fa fa-calendar-o mr-1"></i> 2025-03</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">西班牙巴塞罗那艺术之旅</h3>
+                <p class="text-white/90">三月的巴塞罗那阳光明媚，高迪的建筑杰作令人惊叹，地中海的海风带来无限惬意。</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <img src="images/travel2-1.jpg" alt="西班牙巴塞罗那照片1" class="w-full h-24 object-cover rounded-lg">
+              <img src="images/travel2-2.jpg" alt="西班牙巴塞罗那照片2" class="w-full h-24 object-cover rounded-lg">
+              <img src="images/travel2-3.jpg" alt="西班牙巴塞罗那照片3" class="w-full h-24 object-cover rounded-lg">
+            </div>
+            <p class="text-gray-600 mb-4">
+              巴塞罗那是一座充满艺术气息的城市，高迪的建筑作品如圣家堂、奎尔公园等让人流连忘返。我还参观了毕加索博物馆，领略了大师的早期作品。此外，品尝了当地的海鲜饭和塔帕斯...
+            </p>
+            <a href="travel-detail2.html" class="text-secondary hover:text-secondary/80 font-medium inline-flex items-center"> <!-- 修正链接 -->
+              查看详情 <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 旅行相册 -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">旅行相册</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          用照片记录旅途中的美好瞬间
+        </p>
+        <div class="w-20 h-1 bg-secondary mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- 建议将日本相关照片调整到前排 -->
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album1.jpg" alt="日本东京塔" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album3.jpg" alt="日本富士山" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album7.jpg" alt="日本大阪城" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album2.jpg" alt="西班牙圣家堂" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album5.jpg" alt="日本奈良鹿" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album4.jpg" alt="西班牙奎尔公园" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album6.jpg" alt="西班牙格拉纳达" class="w-full h-48 object-cover hover-scale">
+        </div>
+        <div class="overflow-hidden rounded-lg">
+          <img src="images/album8.jpg" alt="西班牙马德里" class="w-full h-48 object-cover hover-scale">
+            </div>
+      </div>
+        <!-- 旅行小贴士 -->
+  <section class="py-16 bg-gradient-to-b from-white to-secondary/10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">旅行小贴士</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          分享我的旅行经验和实用技巧
+        </p>
+        <div class="w-20 h-1 bg-secondary mx-auto mt-4"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4 shrink-0">
+              <i class="fa fa-suitcase text-xl text-secondary"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">行李打包技巧</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>使用打包立方体分类整理衣物，方便查找和收纳</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>将衣物卷起来放置，比折叠更节省空间</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>带上多功能物品，如围巾可当披肩、毯子或头巾</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>重要物品如护照、钱包、电子设备等放在随身行李中</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4 shrink-0">
+              <i class="fa fa-camera text-xl text-secondary"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">旅行摄影技巧</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>早起拍摄，光线柔和，游客较少</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>尝试不同角度，如低角度、俯拍等，拍出独特视角</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>捕捉当地人文细节，如街头艺人、市场摊贩等</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>带上备用电池和存储卡，避免关键时刻没电或存储空间不足</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4 shrink-0">
+              <i class="fa fa-map-o text-xl text-secondary"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">行程规划建议</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>提前研究目的地，了解当地文化、天气和交通情况</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>行程不要安排太满，留出休息时间，避免过度疲劳</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>预订可免费取消的酒店和机票，增加行程灵活性</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>学习几句当地语言，如问候语、谢谢等，会有帮助</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4 shrink-0">
+              <i class="fa fa-shield text-xl text-secondary"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">旅行安全注意事项</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>购买旅行保险，确保在遇到意外情况时有保障</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>随身携带重要证件的复印件或照片</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>注意个人财物安全，特别是在拥挤的地方</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                  <span>了解当地紧急电话和中国驻外使领馆联系方式</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">我的小世界</h3>
+          <p class="text-gray-400 mb-4">
+            记录生活中的美好瞬间和成长历程，分享阅读、旅行和学习的心得。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-github"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="books.html" class="text-gray-400 hover:text-white transition-colors">读书时光</a></li>
+            <li><a href="travel.html" class="text-gray-400 hover:text-white transition-colors">旅行足迹</a></li>
+            <li><a href="study.html" class="text-gray-400 hover:text-white transition-colors">学业成长</a></li>
+            <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">联系我</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">旅行分类</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">国内旅行</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">国外旅行</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">城市探索</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">自然风光</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">美食之旅</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
+          <p class="text-gray-400 mb-4">
+            订阅我的博客，获取最新更新和推荐。
+          </p>
+          <form>
+            <div class="flex">
+              <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark">
+              <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 rounded-r-lg transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 我的小世界. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-white/90');
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-white/90');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (menuToggle.innerHTML.includes('fa-bars')) {
+        menuToggle.innerHTML = '<i class="fa fa-times text-xl"></i>';
+      } else {
+        menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+    
