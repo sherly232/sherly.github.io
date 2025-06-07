@@ -4,20 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的个人主页</title>
-
-  <!-- 优化后的 Tailwind CSS CDN（确保加载顺序和稳定性） -->
-  <script src="https://cdn.tailwindcss.com/v3.3.3"></script>
-
-  <!-- 升级到 Font Awesome 6.x（兼容现代浏览器，修复字体图标问题） -->
-  <link 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
-    rel="stylesheet" 
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer"
-  >
-
-  <!-- Tailwind 配置（确保在 CDN 加载后执行） -->
+  
+  <!-- 引入 Tailwind CSS（优化 CDN 地址，确保稳定性） -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  
+  <!-- 引入 Font Awesome（更换为更稳定的 CDN） -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
   <script>
     tailwind.config = {
       theme: {
@@ -56,19 +50,16 @@
       }
     }
   </style>
-
-  <!-- 自定义 CSS（保留原有引用） -->
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="bg-gray-50 text-dark">
-  <!-- 导航栏（替换 Font Awesome 图标类名，6.x 版本移除了 'fa-' 前缀） -->
+  <!-- 导航栏 -->
   <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center">
           <a href="index.html" class="text-2xl font-bold text-primary">
-            <i class="fas fa-heart mr-2"></i>欢迎来到，我的小世界
+            <i class="fa fa-heart-o mr-2"></i>欢迎来到，我的小世界
           </a>
         </div>
         
@@ -83,7 +74,7 @@
         <!-- 移动端菜单按钮 -->
         <div class="md:hidden">
           <button id="menu-toggle" class="text-dark hover:text-primary">
-            <i class="fas fa-bars text-xl"></i>
+            <i class="fa fa-bars text-xl"></i>
           </button>
         </div>
       </div>
@@ -100,7 +91,7 @@
     </div>
   </header>
 
-  <!-- 英雄区域（保留原有结构） -->
+  <!-- 英雄区域 -->
   <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-primary/10 to-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center">
@@ -127,7 +118,7 @@
     </div>
   </section>
 
-  <!-- 关于我（替换 Font Awesome 图标类名） -->
+  <!-- 关于我 -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -138,7 +129,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fas fa-book text-2xl text-primary"></i>
+            <i class="fa fa-book text-2xl text-primary"></i>
           </div>
           <h3 class="text-xl font-semibold text-center mb-3">读书爱好者</h3>
           <p class="text-gray-600 text-center">
@@ -148,7 +139,7 @@
         
         <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fas fa-globe text-2xl text-secondary"></i>
+            <i class="fa fa-globe text-2xl text-secondary"></i>
           </div>
           <h3 class="text-xl font-semibold text-center mb-3">旅行探索家</h3>
           <p class="text-gray-600 text-center">
@@ -158,7 +149,7 @@
         
         <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fas fa-graduation-cap text-2xl text-accent"></i>
+            <i class="fa fa-graduation-cap text-2xl text-accent"></i>
           </div>
           <h3 class="text-xl font-semibold text-center mb-3">学习成长者</h3>
           <p class="text-gray-600 text-center">
@@ -169,7 +160,7 @@
     </div>
   </section>
 
-  <!-- 兴趣概览（保留原有结构） -->
+  <!-- 兴趣概览 -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -214,7 +205,7 @@
     </div>
   </section>
 
-  <!-- 最近更新（替换 Font Awesome 图标类名） -->
+  <!-- 最近更新 -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -231,7 +222,7 @@
           <div class="p-6">
             <div class="flex items-center mb-3">
               <span class="text-xs font-medium bg-primary/20 text-primary px-3 py-1 rounded-full">读书</span>
-              <span class="text-gray-500 text-sm ml-3"><i class="fas fa-calendar mr-1"></i> 2025-05-20</span>
+              <span class="text-gray-500 text-sm ml-3"><i class="fa fa-calendar-o mr-1"></i> 2025-05-20</span>
             </div>
             <h3 class="text-xl font-bold text-dark mb-2">《山茶文具店》阅读心得</h3>
             <p class="text-gray-600 mb-4">
@@ -246,7 +237,7 @@
           <div class="p-6">
             <div class="flex items-center mb-3">
               <span class="text-xs font-medium bg-secondary/20 text-secondary px-3 py-1 rounded-full">旅行</span>
-              <span class="text-gray-500 text-sm ml-3"><i class="fas fa-calendar mr-1"></i> 2025-04-15</span>
+              <span class="text-gray-500 text-sm ml-3"><i class="fa fa-calendar-o mr-1"></i> 2025-04-15</span>
             </div>
             <h3 class="text-xl font-bold text-dark mb-2">苏州园林游记</h3>
             <p class="text-gray-600 mb-4">
@@ -259,7 +250,7 @@
     </div>
   </section>
 
-  <!-- 联系我（替换 Font Awesome 图标类名） -->
+  <!-- 联系我 -->
   <section id="contact" class="py-16 bg-gradient-to-b from-white to-primary/10">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -304,16 +295,16 @@
           <h3 class="text-xl font-semibold text-dark mb-4">也可以通过以下方式找到我</h3>
           <div class="flex justify-center space-x-6">
             <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fab fa-weibo text-2xl"></i>
+              <i class="fa fa-weibo text-2xl"></i>
             </a>
             <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fab fa-wechat text-2xl"></i>
+              <i class="fa fa-wechat text-2xl"></i>
             </a>
             <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fab fa-instagram text-2xl"></i>
+              <i class="fa fa-instagram text-2xl"></i>
             </a>
             <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fab fa-github text-2xl"></i>
+              <i class="fa fa-github text-2xl"></i>
             </a>
           </div>
         </div>
@@ -321,7 +312,7 @@
     </div>
   </section>
 
-  <!-- 页脚（替换 Font Awesome 图标类名） -->
+  <!-- 页脚 -->
   <footer class="bg-dark text-white py-10">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -332,16 +323,16 @@
           </p>
           <div class="flex space-x-4">
             <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fab fa-weibo"></i>
+              <i class="fa fa-weibo"></i>
             </a>
             <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fab fa-wechat"></i>
+              <i class="fa fa-wechat"></i>
             </a>
             <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fab fa-instagram"></i>
+              <i class="fa fa-instagram"></i>
             </a>
             <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fab fa-github"></i>
+              <i class="fa fa-github"></i>
             </a>
           </div>
         </div>
@@ -377,7 +368,7 @@
             <div class="flex">
               <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark">
               <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 rounded-r-lg transition-colors">
-                <i class="fas fa-paper-plane"></i>
+                <i class="fa fa-paper-plane"></i>
               </button>
             </div>
           </form>
@@ -409,9 +400,9 @@
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
       if (menuToggle.innerHTML.includes('fa-bars')) {
-        menuToggle.innerHTML = '<i class="fas fa-times text-xl"></i>';
+        menuToggle.innerHTML = '<i class="fa fa-times text-xl"></i>';
       } else {
-        menuToggle.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+        menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
       }
     });
     
