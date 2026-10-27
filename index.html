@@ -1,420 +1,254 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的个人主页</title>
-  
-  <!-- 引入 Tailwind CSS（优化 CDN 地址，确保稳定性） -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-  
-  <!-- 引入 Font Awesome（更换为更稳定的 CDN） -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  
-  <!-- Tailwind 配置 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#f8bbd0',
-            secondary: '#a5d6a7',
-            accent: '#ffccbc',
-            dark: '#424242',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-        },
-      }
-    };
-  </script>
-
-  <!-- 自定义 Tailwind 样式 -->
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-      .text-shadow {
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      .hover-scale {
-        transition: transform 0.3s ease;
-      }
-      .hover-scale:hover {
-        transform: scale(1.05);
-      }
-      .gradient-overlay {
-        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>干饭雷达 · 校园食堂点评推荐</title>
+<meta name="description" content="干饭雷达 —— 专为大学生做的校园食堂点评推荐工具，发现新菜品、避开踩雷窗口、告别「今天吃什么」。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍚</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-gray-50 text-dark">
-  <!-- 导航栏 -->
-  <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center">
-          <a href="index.html" class="text-2xl font-bold text-primary">
-            <i class="fa fa-heart-o mr-2"></i>欢迎来到，我的小世界
-          </a>
-        </div>
-        
-        <!-- 桌面导航 -->
-        <nav class="hidden md:flex space-x-8">
-          <a href="index.html" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
-          <a href="books.html" class="text-dark hover:text-primary transition-colors font-medium">读书时光</a>
-          <a href="travel.html" class="text-dark hover:text-primary transition-colors font-medium">旅行足迹</a>
-          <a href="study.html" class="text-dark hover:text-primary transition-colors font-medium">学业成长</a>
-        </nav>
-        
-        <!-- 移动端菜单按钮 -->
-        <div class="md:hidden">
-          <button id="menu-toggle" class="text-dark hover:text-primary">
-            <i class="fa fa-bars text-xl"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- 移动端导航菜单 -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-      <div class="container mx-auto px-4 py-3 space-y-2">
-        <a href="index.html" class="block py-2 text-dark hover:text-primary">首页</a>
-        <a href="books.html" class="block py-2 text-dark hover:text-primary">读书时光</a>
-        <a href="travel.html" class="block py-2 text-dark hover:text-primary">旅行足迹</a>
-        <a href="study.html" class="block py-2 text-dark hover:text-primary">学业成长</a>
-      </div>
-    </div>
-  </header>
+<body>
 
-  <!-- 英雄区域 -->
-  <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-primary/10 to-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 mb-8 md:mb-0">
-          <img src="images/profile.jpg" alt="个人照片" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover mx-auto md:mx-0 shadow-lg hover-scale">
-        </div>
-        <div class="md:w-1/2 text-center md:text-left">
-          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark leading-tight mb-4">
-            你好，我是<span class="text-primary">谢润黎</span>
-          </h1>
-          <p class="text-lg md:text-xl text-gray-600 mb-6 max-w-lg mx-auto md:mx-0">
-            热爱阅读、旅行和探索新知识的大学生，欢迎来到我的个人世界。
-          </p>
-          <div class="flex justify-center md:justify-start space-x-4">
-            <a href="books.html" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-md hover:shadow-lg transition-all">
-              开始探索
-            </a>
-            <a href="#contact" class="px-6 py-3 bg-white border border-primary text-primary hover:bg-primary/10 rounded-full shadow-sm hover:shadow-md transition-all">
-              联系我
-            </a>
-          </div>
-        </div>
+<!-- ============ 顶部栏 ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-logo">🍚</span>
+      <div class="brand-text">
+        <strong>干饭雷达</strong>
+        <small id="topbarSub">校园食堂点评推荐</small>
       </div>
     </div>
-  </section>
-
-  <!-- 关于我 -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">关于我</h2>
-        <div class="w-20 h-1 bg-primary mx-auto"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fa fa-book text-2xl text-primary"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-center mb-3">读书爱好者</h3>
-          <p class="text-gray-600 text-center">
-            每周至少阅读一本书，偏爱文学和心理学，喜欢在文字中寻找共鸣和启发。
-          </p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fa fa-globe text-2xl text-secondary"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-center mb-3">旅行探索家</h3>
-          <p class="text-gray-600 text-center">
-            已经走过15个城市，喜欢用相机记录风景，用脚步丈量世界，体验不同的文化。
-          </p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <i class="fa fa-graduation-cap text-2xl text-accent"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-center mb-3">学习成长者</h3>
-          <p class="text-gray-600 text-center">
-            信息与安全专业学生，热衷于参加各种学术活动和竞赛，不断挑战自我。
-          </p>
-        </div>
-      </div>
+    <div class="topbar-right">
+      <div class="meal-chip" id="mealChip"><span id="mealEmoji">🍱</span><span id="mealName">午餐</span></div>
+      <button class="icon-btn" id="btnHelp" title="关于本作品">?</button>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- 兴趣概览 -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">我的兴趣世界</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          生活是一场奇妙的旅程，我喜欢在不同的领域中探索和发现。
-        </p>
-        <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="books.html" class="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
-          <img src="images/books-preview.jpg" alt="读书预览" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 gradient-overlay flex items-end">
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-white mb-2">读书时光</h3>
-              <p class="text-white/90">探索我的私人书架，分享阅读心得</p>
-            </div>
-          </div>
-        </a>
-        
-        <a href="travel.html" class="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
-          <img src="images/travel-preview.jpg" alt="旅行预览" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 gradient-overlay flex items-end">
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-white mb-2">旅行足迹</h3>
-              <p class="text-white/90">记录我的旅行故事和美好回忆</p>
-            </div>
-          </div>
-        </a>
-        
-        <a href="study.html" class="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
-          <img src="images/study-preview.jpg" alt="学习预览" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 gradient-overlay flex items-end">
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-white mb-2">学业成长</h3>
-              <p class="text-white/90">参与的活动和取得的点滴进步</p>
-            </div>
-          </div>
-        </a>
-      </div>
+<div class="layout">
+
+  <!-- ============ 侧边导航（桌面端） ============ -->
+  <nav class="sidebar">
+    <button class="nav-item active" data-view="home"><span class="ni">🎯</span><span>今天吃啥</span></button>
+    <button class="nav-item" data-view="discover"><span class="ni">🔍</span><span>发现菜品</span></button>
+    <button class="nav-item" data-view="rank"><span class="ni">🏆</span><span>榜单排行</span></button>
+    <button class="nav-item" data-view="review"><span class="ni">✍️</span><span>写点评</span></button>
+    <button class="nav-item" data-view="me"><span class="ni">🧬</span><span>我的口味</span></button>
+    <div class="sidebar-foot">
+      <div class="sf-title">数据说明</div>
+      <div class="sf-text">校内外食堂数据由同学众包点评生成，当前为演示种子数据（5 食堂 / 22 窗口 / 76 菜品）。</div>
     </div>
-  </section>
+  </nav>
 
-  <!-- 最近更新 -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">最近更新</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          分享我的最新动态和思考
-        </p>
-        <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-          <img src="images/latest-book.jpg" alt="最近阅读的书籍" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <div class="flex items-center mb-3">
-              <span class="text-xs font-medium bg-primary/20 text-primary px-3 py-1 rounded-full">读书</span>
-              <span class="text-gray-500 text-sm ml-3"><i class="fa fa-calendar-o mr-1"></i> 2025-05-20</span>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">《山茶文具店》阅读心得</h3>
-            <p class="text-gray-600 mb-4">
-              最近读完了《山茶文具店》，被书中细腻的情感和传统的手写信文化所打动。在这个电子通讯发达的时代，手写书信似乎成了一种奢侈...
-            </p>
-           
-          </div>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-          <img src="images/latest-travel.jpg" alt="最近的旅行" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <div class="flex items-center mb-3">
-              <span class="text-xs font-medium bg-secondary/20 text-secondary px-3 py-1 rounded-full">旅行</span>
-              <span class="text-gray-500 text-sm ml-3"><i class="fa fa-calendar-o mr-1"></i> 2025-04-15</span>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">苏州园林游记</h3>
-            <p class="text-gray-600 mb-4">
-              四月的苏州烟雨朦胧，拙政园的绿意盎然，留园的精巧布局，都让人流连忘返。这次旅行不仅欣赏了美景，还了解了许多园林文化...
-            </p>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ============ 主内容 ============ -->
+  <main class="main">
 
-  <!-- 联系我 -->
-  <section id="contact" class="py-16 bg-gradient-to-b from-white to-primary/10">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">联系我</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          如果你也热爱阅读、旅行或学习，欢迎与我交流！
-        </p>
-        <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
-      </div>
-      
-      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-10">
-        <form>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
-              <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="请输入您的姓名">
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
-              <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="请输入您的邮箱">
-            </div>
-          </div>
-          
-          <div class="mb-6">
-            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">主题</label>
-            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="请输入主题">
-          </div>
-          
-          <div class="mb-6">
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">留言</label>
-            <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="请输入您的留言内容"></textarea>
-          </div>
-          
-          <div class="text-center">
-            <button type="submit" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-md hover:shadow-lg transition-all">
-              发送留言
-            </button>
-          </div>
-        </form>
-        
-        <div class="mt-10 text-center">
-          <h3 class="text-xl font-semibold text-dark mb-4">也可以通过以下方式找到我</h3>
-          <div class="flex justify-center space-x-6">
-            <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fa fa-weibo text-2xl"></i>
-            </a>
-            <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fa fa-wechat text-2xl"></i>
-            </a>
-            <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fa fa-instagram text-2xl"></i>
-            </a>
-            <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-              <i class="fa fa-github text-2xl"></i>
-            </a>
+    <!-- ---------- 视图1：今天吃啥 ---------- -->
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div class="hero-left">
+          <h1 id="greetTitle">中午好，今天吃点什么？</h1>
+          <p id="greetSub">已根据你的口味画像，从 76 道菜里挑出最合胃口的几道。</p>
+          <div class="hero-stats">
+            <div class="hs"><b id="hsDishes">76</b><span>在售菜品</span></div>
+            <div class="hs"><b id="hsOpen">3</b><span>食堂营业中</span></div>
+            <div class="hs"><b id="hsWarn">2</b><span>踩雷预警</span></div>
           </div>
         </div>
+        <div class="hero-right">
+          <div class="hero-emoji" id="heroEmoji">🍜</div>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 页脚 -->
-  <footer class="bg-dark text-white py-10">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-xl font-bold mb-4">我的小世界</h3>
-          <p class="text-gray-400 mb-4">
-            记录生活中的美好瞬间和成长历程，分享阅读、旅行和学习的心得。
-          </p>
-          <div class="flex space-x-4">
-            <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fa fa-weibo"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fa fa-wechat"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fa fa-instagram"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors">
-              <i class="fa fa-github"></i>
-            </a>
-          </div>
+      <!-- 帮我决定 · 抽卡 -->
+      <div class="card decide-card">
+        <div class="card-head">
+          <h2>🎲 帮我决定</h2>
+          <span class="card-sub">选择困难症专用，点一下就出结果</span>
         </div>
-        
-        <div>
-          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-            <li><a href="books.html" class="text-gray-400 hover:text-white transition-colors">读书时光</a></li>
-            <li><a href="travel.html" class="text-gray-400 hover:text-white transition-colors">旅行足迹</a></li>
-            <li><a href="study.html" class="text-gray-400 hover:text-white transition-colors">学业成长</a></li>
-            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">联系我</a></li>
-          </ul>
+        <div class="decide-stage" id="decideStage">
+          <div class="slot" data-i="0"><div class="slot-inner"><span class="slot-q">?</span></div></div>
+          <div class="slot" data-i="1"><div class="slot-inner"><span class="slot-q">?</span></div></div>
+          <div class="slot" data-i="2"><div class="slot-inner"><span class="slot-q">?</span></div></div>
         </div>
-        
-        <div>
-          <h3 class="text-lg font-semibold mb-4">读书分类</h3>
-          <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">文学小说</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">心理学</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">历史文化</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">科技科普</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">哲学思考</a></li>
-          </ul>
+        <div class="decide-actions">
+          <button class="btn-primary" id="btnRoll">🎲 摇一个（3选1）</button>
+          <button class="btn-ghost" id="btnRollDirect">⚡ 直接开吃</button>
         </div>
-        
-        <div>
-          <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
-          <p class="text-gray-400 mb-4">
-            订阅我的博客，获取最新更新和推荐。
-          </p>
-          <form>
-            <div class="flex">
-              <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark">
-              <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 rounded-r-lg transition-colors">
-                <i class="fa fa-paper-plane"></i>
-              </button>
-            </div>
-          </form>
-        </div>
+        <div class="decide-result" id="decideResult" hidden></div>
       </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-        <p>&copy; 2025 我的小世界. 保留所有权利.</p>
-      </div>
-    </div>
-  </footer>
 
-  <script>
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('bg-white', 'shadow-md');
-        navbar.classList.remove('bg-white/90');
-      } else {
-        navbar.classList.remove('bg-white', 'shadow-md');
-        navbar.classList.add('bg-white/90');
-      }
-    });
-    
-    // 移动端菜单切换
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      if (menuToggle.innerHTML.includes('fa-bars')) {
-        menuToggle.innerHTML = '<i class="fa fa-times text-xl"></i>';
-      } else {
-        menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
-      }
-    });
-    
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
+      <!-- 为你推荐 -->
+      <div class="sec-head">
+        <h2>✨ 为你推荐</h2>
+        <div class="seg" id="recommendSeg">
+          <button class="seg-btn active" data-mode="match">口味匹配</button>
+          <button class="seg-btn" data-mode="hot">大家都在吃</button>
+          <button class="seg-btn" data-mode="value">性价比</button>
+          <button class="seg-btn" data-mode="fast">不用排队</button>
+        </div>
+      </div>
+      <div class="dish-grid" id="recommendGrid"></div>
+
+      <!-- 踩雷预警 -->
+      <div class="sec-head"><h2>⚠️ 今日避坑</h2><span class="card-sub">近 7 天差评集中，慎点</span></div>
+      <div class="warn-list" id="warnList"></div>
+
+      <!-- 实时排队 -->
+      <div class="sec-head"><h2>⏱️ 实时排队</h2><span class="card-sub">同学众包上报，随时更新</span></div>
+      <div class="queue-list" id="queueList"></div>
+    </section>
+
+    <!-- ---------- 视图2：发现菜品 ---------- -->
+    <section class="view" id="view-discover">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="搜菜名 / 窗口 / 食堂，比如「牛肉面」">
+        <button class="btn-primary sm" id="btnSearch">搜索</button>
+      </div>
+
+      <div class="filters">
+        <div class="frow">
+          <span class="flabel">食堂</span>
+          <div class="chips" id="fCanteen"></div>
+        </div>
+        <div class="frow">
+          <span class="flabel">价格</span>
+          <div class="chips" id="fPrice"></div>
+        </div>
+        <div class="frow">
+          <span class="flabel">口味</span>
+          <div class="chips" id="fTaste"></div>
+        </div>
+        <div class="frow">
+          <span class="flabel">排序</span>
+          <div class="chips" id="fSort"></div>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <h2 id="discoverCount">全部菜品</h2>
+        <button class="btn-ghost sm" id="btnResetFilter">重置筛选</button>
+      </div>
+      <div class="dish-grid" id="discoverGrid"></div>
+      <div class="empty" id="discoverEmpty" hidden>没有符合条件的菜品，换个筛选试试～</div>
+    </section>
+
+    <!-- ---------- 视图3：榜单 ---------- -->
+    <section class="view" id="view-rank">
+      <div class="seg seg-full" id="rankSeg">
+        <button class="seg-btn active" data-rank="must">🔥 必吃榜</button>
+        <button class="seg-btn" data-rank="avoid">💣 避雷榜</button>
+        <button class="seg-btn" data-rank="value">💰 性价比</button>
+        <button class="seg-btn" data-rank="queue">🐢 排队最久</button>
+        <button class="seg-btn" data-rank="new">🆕 本周上新</button>
+        <button class="seg-btn" data-rank="stall">🏪 窗口榜</button>
+      </div>
+      <div class="rank-wrap" id="rankWrap"></div>
+    </section>
+
+    <!-- ---------- 视图4：写点评 ---------- -->
+    <section class="view" id="view-review">
+      <div class="card">
+        <div class="card-head"><h2>✍️ 写一条点评</h2><span class="card-sub">选一道菜，四个维度打分</span></div>
+        <div class="form-row">
+          <label>选择菜品</label>
+          <select id="rvDish"></select>
+        </div>
+        <div class="rate-box" id="rateBox"></div>
+        <div class="form-row">
+          <label>说点什么</label>
+          <textarea id="rvText" rows="3" placeholder="比如：分量挺足的，就是今天有点咸…"></textarea>
+        </div>
+        <div class="form-row">
+          <label>快捷标签</label>
+          <div class="chips" id="rvTags"></div>
+        </div>
+        <div class="form-row">
+          <label>你的昵称</label>
+          <input type="text" id="rvUser" placeholder="匿名干饭人" maxlength="16">
+        </div>
+        <button class="btn-primary" id="btnSubmitReview">发布点评</button>
+      </div>
+
+      <div class="sec-head"><h2>我的点评</h2><span class="card-sub" id="myReviewCount"></span></div>
+      <div id="myReviews"></div>
+    </section>
+
+    <!-- ---------- 视图5：我的口味 ---------- -->
+    <section class="view" id="view-me">
+      <div class="profile-card">
+        <div class="pf-avatar" id="pfAvatar">🍚</div>
+        <div class="pf-main">
+          <h2 id="pfName">干饭新人</h2>
+          <div class="pf-tags" id="pfTags"></div>
+          <div class="pf-stats" id="pfStats"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>🧬 口味画像</h2><span class="card-sub">决定推荐结果的核心设置</span></div>
+
+        <div class="slider-row">
+          <div class="sl-head"><span>能吃辣</span><b id="vSpice">中等</b></div>
+          <input type="range" id="sSpice" min="0" max="5" step="1" value="2">
+          <div class="sl-scale"><span>滴辣不沾</span><span>无辣不欢</span></div>
+        </div>
+
+        <div class="slider-row">
+          <div class="sl-head"><span>一餐预算</span><b id="vBudget">15 元</b></div>
+          <input type="range" id="sBudget" min="5" max="40" step="1" value="15">
+          <div class="sl-scale"><span>5 元</span><span>40 元</span></div>
+        </div>
+
+        <div class="slider-row">
+          <div class="sl-head"><span>排队容忍度</span><b id="vQueue">10 分钟</b></div>
+          <input type="range" id="sQueue" min="0" max="30" step="1" value="10">
+          <div class="sl-scale"><span>一秒都等不了</span><span>排多久都行</span></div>
+        </div>
+
+        <div class="form-row">
+          <label>偏好品类（可多选）</label>
+          <div class="chips" id="pCats"></div>
+        </div>
+
+        <div class="form-row">
+          <label>忌口 / 不吃</label>
+          <div class="chips" id="pAvoid"></div>
+        </div>
+
+        <button class="btn-primary" id="btnSaveProfile">保存口味画像</button>
+      </div>
+
+      <div class="sec-head"><h2>❤️ 我的收藏</h2><span class="card-sub" id="favCount"></span></div>
+      <div class="dish-grid" id="favGrid"></div>
+      <div class="empty" id="favEmpty" hidden>还没有收藏，去发现页点个 ❤️ 吧</div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ 底部 Tab（移动端） ============ -->
+<nav class="tabbar">
+  <button class="tab active" data-view="home"><span>🎯</span>今天吃啥</button>
+  <button class="tab" data-view="discover"><span>🔍</span>发现</button>
+  <button class="tab" data-view="rank"><span>🏆</span>榜单</button>
+  <button class="tab" data-view="review"><span>✍️</span>点评</button>
+  <button class="tab" data-view="me"><span>🧬</span>我的</button>
+</nav>
+
+<!-- ============ 菜品详情弹窗 ============ -->
+<div class="modal-mask" id="modalMask" hidden>
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
